@@ -31,18 +31,18 @@ export const fetchChatRoomByUserID = async (userId) => {
   return new Promise((resolve, reject) => {
     try {
       chatRoomRef
-      .where('members', 'array-contains', userId)
-      .onSnapshot((querySnapshot) => {
-        const chatRooms = [];
-        querySnapshot.forEach((doc) => {
-          const data = doc.data();
-          data.id = doc.id;
-          if (data.recentMessage) chatRooms.push(data);
+        .where('members', 'array-contains', userId)
+        .onSnapshot((querySnapshot) => {
+          const chatRooms = [];
+          querySnapshot.forEach((doc) => {
+            const data = doc.data();
+            data.id = doc.id;
+            if (data.recentMessage) chatRooms.push(data);
+          });
+          resolve(chatRooms);
         });
-        resolve(chatRooms);
-      });
     } catch (err) {
-      reject(err)
+      reject(err);
     }
   });
 };
@@ -52,18 +52,16 @@ export const fetchChatRoomByIds = (chatRoomIds) => {
   return new Promise((resolve, reject) => {
     chatRoomIds.forEach(async (chatRoomId) => {
       await chatRoomRef
-      .get(chatRoomId)
-      .then(function (doc) {
-        chatRoom.push(doc.data());
+        .get(chatRoomId)
+        .then(function (doc) {
+          chatRoom.push(doc.data());
         })
         .catch(function (error) {
-          // eslint-disable-next-line no-console
           console.error('Error get document: ', error);
         });
     });
     resolve(chatRoom);
-  })
-
+  });
 };
 
 export const updateChatRoom = (chatRoom) => {
@@ -72,20 +70,19 @@ export const updateChatRoom = (chatRoom) => {
       .doc(chatRoom.id)
       .set(chatRoom)
       .then(function (docRef) {
-        resolve(docRef)
+        resolve(docRef);
       })
       .catch(function (error) {
-        // eslint-disable-next-line no-console
-        reject(error)
+        reject(error);
       });
-  })
+  });
 };
 
-export const addNewChatRoomToUser = (user, chatRoomId) => {
+export const addChatRoomIntoUser = (user, chatRoomId) => {
   try {
-    const chatRooms = user?.chatRoom ? user.chatRoom : [];
-    const existed = chatRooms.filter((chatRoom) => chatRoom === chatRoomId);
-    if (existed.length === 0) {
+    const chatRooms = user?.chatRoom || [];
+    const isExistChatRoom = chatRooms.includes(chatRoomId);
+    if (!isExistChatRoom) {
       chatRooms.push(chatRoomId);
       user.chatRoom = chatRooms;
       const userRef = db.collection('user');
