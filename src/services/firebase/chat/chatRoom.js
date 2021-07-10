@@ -11,11 +11,12 @@ export const createRoom = async (users, createdBy, name, type) => {
       name,
       type,
     };
+
     return new Promise((resolve, reject) => {
       chatRoomRef
         .add(chatRoom)
         .then(function (docRef) {
-          resolve(fetchChatRoomByUserID(createdBy));
+          resolve(docRef);
         })
         .catch(function (error) {
           reject(error);
@@ -78,7 +79,7 @@ export const updateChatRoom = (chatRoom) => {
   });
 };
 
-export const addChatRoomIntoUser = (user, chatRoomId) => {
+export const addUserToChatRoom = (user, chatRoomId) => {
   try {
     const chatRooms = user?.chatRoom || [];
     const isExistChatRoom = chatRooms.includes(chatRoomId);
@@ -88,5 +89,5 @@ export const addChatRoomIntoUser = (user, chatRoomId) => {
       const userRef = db.collection('user');
       userRef.doc(user.uid).set(user);
     }
-  } catch (error) {}
+  } catch (error) { }
 };
