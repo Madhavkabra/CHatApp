@@ -16,9 +16,16 @@ const Routes = () => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    if (authenticated) {
+      history.push('/chat')
+    } else {
+      history.push('/')
+    }
+  }, [authenticated])
+
+  useEffect(() => {
     auth().onAuthStateChanged((user) => {
       if (user) {
-        history.push('/chat')
         setAuthenticated(true)
         setLoading(false)
       } else {
