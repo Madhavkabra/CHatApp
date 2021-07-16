@@ -24,3 +24,12 @@ yarn-error.log*
 
 .env
 .vscode
+.firebaserc
+firebase.json
+database.rules.json
+firestore.indexes.json
+*.rules
+remoteconfig.template.json
+/functions
+.firebase
+.github
