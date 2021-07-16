@@ -8,7 +8,7 @@ function useUsers() {
     loading: true,
     users: [],
   });
-
+  
   React.useEffect(() => {
     const unsubscribe = db
       .collection('user')

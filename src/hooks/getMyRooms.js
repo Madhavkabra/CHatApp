@@ -1,12 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { db } from '../services/firebase/firebase';
 
 const chatRoomRef = db.collection('org').doc('chat').collection('chatRoom');
 
 function useMyRooms(userId) {
-  if (!userId) {
-    console.log("You need a id")
-  }
 
   const [data, setData] = useState({
     error: null,
@@ -14,7 +11,11 @@ function useMyRooms(userId) {
     rooms: [],
   });
 
-  React.useEffect(() => {
+  useEffect(() => {
+    if (!userId) {
+      console.log("You need a id")
+      return
+    }
     const unsubscribe = chatRoomRef
       .where('members', 'array-contains', userId)
       .onSnapshot(
@@ -35,7 +36,7 @@ function useMyRooms(userId) {
       );
 
     return unsubscribe;
-  }, []);
+  }, [userId]);
 
   return data;
 }
