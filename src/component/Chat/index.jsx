@@ -4,6 +4,8 @@ import useUsers from '../../hooks/getAllUsers'
 import useMyRooms from '../../hooks/getMyRooms'
 import { auth } from '../../services/firebase/firebase'
 import AddNewRoom from '../AddRoomForm'
+import Logout from '../Logout'
+import MyRooms from '../MyRooms'
 
 const Chat = () => {
   const { users } = useUsers()
@@ -15,21 +17,8 @@ const Chat = () => {
   return (
     <div>
       <AddNewRoom users={users} currentUsersId={currentUsersId} />
-      <div>
-        My Chats
-        <div>
-          {rooms &&
-            rooms.length &&
-            rooms.map((room, index) => (
-              <div
-                key={index}
-                onClick={() => history.push(`/rooms/${room.id}`)}
-              >
-                {room.name}
-              </div>
-            ))}
-        </div>
-      </div>
+      <MyRooms currentUsersId={currentUsersId} />
+      <Logout />
     </div>
   )
 }
