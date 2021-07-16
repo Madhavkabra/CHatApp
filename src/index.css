@@ -15,3 +15,22 @@ code {
 #root {
   margin: 20px
 }
+
+input {
+  height: 24px;
+  font-size: 16px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  outline: none;
+  border: 1px solid #555
+}
+
+button {
+  font-size: 16px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  outline: none;
+  border: 1px solid #555;
+  display: flex;
+  align-items: center;
+}
