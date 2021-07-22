@@ -13,8 +13,8 @@ const useGetMessage = (roomId) => {
     .doc('chat')
     .collection('chatRoom')
     .doc(roomId)
-    .collection('chats')
-    .orderBy('sendAt')
+    .collection('messages')
+    .orderBy('sentAt')
 
   useEffect(() => {
     const unSubscribeObserver = query.onSnapshot(
@@ -27,10 +27,11 @@ const useGetMessage = (roomId) => {
       },
       (error) => {
         setData({
+          ...data,
           error,
           loading: false,
           messages: [],
-        }); // <---4
+        });
       },
     )
 

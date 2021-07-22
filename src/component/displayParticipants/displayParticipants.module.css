@@ -1,0 +1,46 @@
+.displayPatientHeader {
+  background-image: linear-gradient(142deg, #060607, #061e63bf) !important;
+  /* background-image: linear-gradient(135deg, #646d94, #764ba2) !important; */
+  /* background-image: linear-gradient(135deg, #667eea, #764ba2) !important; */
+  /* background-image: linear-gradient(90deg, #936b73 0, #bc8a94 19%, #ea797f 60%, #fc715d) !important; */
+  /* position: fixed; */
+  display: flex;
+  align-items: center;
+  top: 0px;
+  width: 100%;
+}
+
+.participantsContainer {
+  display: flex;
+  overflow: hidden;
+  padding: 10px;
+  font-family: Montserrat;
+  color: #CED4DA;
+  flex-direction: column;
+}
+
+.groupName {
+  margin: 0px;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.membersName {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+.logo {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+}
+
+.participantsEmail {
+  max-width: 100px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-size: 12px;
+}

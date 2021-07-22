@@ -1,3 +1,4 @@
+import firebase from 'firebase';
 import { db } from '../firebase';
 
 const chatRoomRef = db.collection('org').doc('chat').collection('chatRoom');
@@ -6,7 +7,7 @@ export const sendMessage = (messageText, chatRoomId, sentBy) => {
   if (messageText.trim()) {
     const message = {
       messageText,
-      sentAt: new Date(),
+      sentAt: firebase.firestore.Timestamp.now(),
       sentBy,
     };
     return new Promise((resolve, reject) => {
