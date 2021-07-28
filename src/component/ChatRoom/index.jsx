@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { auth } from '../../services/firebase/firebase'
 
-import DisplayParticipants from '../DisplayParticipants'
+import DisplayParticipants from '../DisplayParticipant'
 import MessageField from './components/chatRoomField'
 import MessageChatContainer from './components/MessageChatContainer'
 
