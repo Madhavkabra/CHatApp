@@ -1,15 +1,118 @@
+.chatAppWraperContainer {
+  background-color: black;
+  height: 100vh
+}
+
 .sender {
   font-size: 16px;
   font-weight: 700;
+  margin: 0px;
 }
 
 .time {
-  font-size: 12px;
+  font-size: 10px;
   font-weight: lighter;
   margin-left: 8px;
+}
+
+.edit {
+  font-size: 10px;
+  font-weight: lighter;
+  margin-left: 3px;
 }
 
 .lowerContainer {
   display: flex;
   align-items: center;
+  padding: 5px 10px;
+}
+
+.messageField {
+  height: 24px;
+  font-size: 16px;
+  padding: 4px 8px 4px 35px;
+  border-radius: 16px;
+  background-color: #54658a;
+  opacity: 0.9;
+  color: #ffffff;
+  outline: none;
+  width: calc(100% - 62px);
+  margin-right: 10px;
+}
+
+.chatContainer {
+  overflow: auto;
+}
+
+.chatContainerWithOutEmoji {
+  height: calc(100% - 100.5px);
+}
+
+.chatContainerWithEmoji {
+  height: calc(100% - 519.5px);
+}
+
+.myMessages {
+  background: #0c2d4e !important;
+}
+
+.wraper {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.messages {
+  position: relative;
+  background: #334b8e6e;
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-family: Montserrat;
+  color: #CED4DA;
+  margin: 10px 10px 0px;
+  max-width: 200px;
+  padding-right: 26px;
+}
+
+.texMessage {
+  margin: 0px;
+  width: 100%;
+  word-break: break-all;
+  white-space: normal;
+}
+
+.messageContainer {
+  display: flex;
+  justify-content: flex-end;
+  margin: 4px 0px;
+  align-items: flex-end;
+}
+
+.emoji {
+  width: 20px;
+  position: absolute;
+  left: 20px;
+  z-index: 1;
+}
+
+/* width */
+.chatContainer::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+.chatContainer::-webkit-scrollbar-track {
+  background: #000000;
+  border-radius: 16px;
+}
+
+/* Handle */
+.chatContainer::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 16px;
+}
+
+/* Handle on hover */
+.chatContainer::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

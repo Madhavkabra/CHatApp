@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: Montserrat !important;
 }
 
 code {
@@ -13,7 +14,7 @@ code {
 }
 
 #root {
-  margin: 20px
+  /* margin: 20px */
 }
 
 input {

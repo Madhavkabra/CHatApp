@@ -1,68 +1,105 @@
-import React, { useEffect, useState } from 'react'
-import firebase from 'firebase'
+import React, { useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { auth, db } from '../../services/firebase/firebase'
+import { auth } from '../../services/firebase/firebase'
+
+import DisplayParticipants from '../DisplayParticipant'
+import MessageField from './components/chatRoomField'
+import MessageChatContainer from './components/MessageChatContainer'
+
 import useGetMessage from '../../hooks/getAllMessage'
-import useGetRoomMembers from '../../hooks/getRoomMembers'
+import useGetRoomData from '../../hooks/getRoomData'
+import {
+  deleteMessage,
+  editMessage,
+  sendMessage,
+} from '../../services/firebase/chat/message'
+
 import styles from './chatRoom.module.css'
-import Logout from '../Logout'
 
 const ChatRoom = () => {
   const [messageField, setMessageField] = useState('')
+  const [chatID, setchatID] = useState(null)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [chatsData, setChatsData] = useState([])
-
+  const [isEmojiOpen, setisEmojiOpen] = useState(false)
   const { roomId } = useParams()
-  const senderEmail = auth()?.currentUser?.email
+  const latestMessageRef = useRef(null)
+  const messageFieldRef = useRef(null)
 
   const { messages: messageData } = useGetMessage(roomId)
-  const { members } = useGetRoomMembers(roomId)
+  const { members, roomName } = useGetRoomData(roomId)
+
+  const senderEmail = auth()?.currentUser?.email
 
   useEffect(() => {
     setChatsData(messageData)
-    return () => { }
+    return () => {}
   }, [messageData])
 
-  const sendMessage = () => {
-    db.collection('org')
-      .doc('chat')
-      .collection('chatRoom')
-      .doc(roomId)
-      .collection('chats')
-      .add({
-        message: messageField,
-        senderEmail,
-        sendAt: firebase.firestore.Timestamp.now(),
-      })
-      .then((success) => console.log(success))
-      .catch((error) => console.log(error))
-    setMessageField('')
+  useEffect(() => {
+    latestMessageRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }, [chatsData])
+
+  const sendMessageToChatRoom = () => {
+    if (chatID) {
+      editMessage(roomId, chatID, messageField)
+        .then((success) => {
+          console.log(success)
+          setMessageField('')
+          setchatID(null)
+        })
+        .catch((error) => console.log(error))
+    } else {
+      sendMessage(messageField, roomId, senderEmail)
+        .then((success) => {
+          console.log(success)
+          setMessageField('')
+        })
+        .catch((error) => {
+          console.log(`err : ${error}`)
+        })
+    }
   }
+
+  const toggleEmojiPicker = () => {
+    setisEmojiOpen(!isEmojiOpen)
+  }
+
+  const toggleMenu = (id) => {
+    setchatID(id)
+    setIsMenuOpen(!isMenuOpen)
+  }
+
+  const editMessageHandler = (oldMessage) => {
+    setMessageField(oldMessage)
+    setIsMenuOpen(false)
+  }
+
+  const deleteMessageHandler = () => {
+    deleteMessage(roomId, chatID).then(() => setchatID(null))
+  }
+
   return (
-    <div>
-      {!!(chatsData?.length) ? chatsData?.map((chat, index) => (
-        <div key={index}>
-          <div>
-            <span className={styles.sender}>{chat.senderEmail}</span>
-            <span className={styles.time}>{new Date(chat.sendAt.seconds * 1000).toLocaleTimeString('en-US', {
-              hour12: true,
-            })}
-            </span>
-          </div>
-          <div>
-            {chat.message}
-          </div>
-        </div>
-      )) : <div>Say Hi! You are the first one here.</div>
-      }
-      <div className={styles.lowerContainer}>
-        <input
-          value={messageField}
-          onChange={(e) => setMessageField(e.target.value)}
-          type="text"
-        />
-        <button onClick={sendMessage}>send</button>
-      </div>
-      <Logout />
+    <div className={styles.chatAppWraperContainer}>
+      <DisplayParticipants members={members} roomName={roomName} />
+      <MessageChatContainer
+        chatsData={chatsData}
+        chatID={chatID}
+        isEmojiOpen={isEmojiOpen}
+        editMessageHandler={editMessageHandler}
+        latestMessageRef={latestMessageRef}
+        deleteMessageHandler={deleteMessageHandler}
+        toggleMenu={toggleMenu}
+        isMenuOpen={isMenuOpen}
+      />
+      <MessageField
+        sendMessageToChatRoom={sendMessageToChatRoom}
+        toggleEmojiPicker={toggleEmojiPicker}
+        messageField={messageField}
+        setMessageField={setMessageField}
+        messageFieldRef={messageFieldRef}
+        isEmojiOpen={isEmojiOpen}
+      />
     </div>
   )
 }
