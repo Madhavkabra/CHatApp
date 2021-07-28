@@ -6,6 +6,7 @@ import { auth } from '../../services/firebase/firebase'
 import AddNewRoom from '../AddRoomForm'
 import Logout from '../Logout'
 import MyRooms from '../MyRooms'
+import UserProfileView from '../UserProfile/components/UserProfileView'
 
 const Chat = () => {
   const { users } = useUsers()
@@ -18,7 +19,10 @@ const Chat = () => {
     <div>
       <AddNewRoom users={users} currentUsersId={currentUsersId} />
       <MyRooms currentUsersId={currentUsersId} />
-      <Logout />
+      <div>
+        <UserProfileView />
+        <Logout />
+      </div>
     </div>
   )
 }

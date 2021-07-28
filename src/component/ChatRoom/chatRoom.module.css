@@ -15,6 +15,12 @@
   margin-left: 8px;
 }
 
+.edit {
+  font-size: 10px;
+  font-weight: lighter;
+  margin-left: 3px;
+}
+
 .lowerContainer {
   display: flex;
   align-items: center;
@@ -39,17 +45,14 @@
 }
 
 .chatContainerWithOutEmoji {
-  /* max-height: calc(100% - 100.5px); */
   height: calc(100% - 100.5px);
 }
 
 .chatContainerWithEmoji {
-  /* max-height: calc(100% - 519.5px); */
   height: calc(100% - 519.5px);
 }
 
 .myMessages {
-  text-align: right;
   background: #0c2d4e !important;
 }
 
@@ -60,18 +63,27 @@
 }
 
 .messages {
+  position: relative;
   background: #334b8e6e;
-  padding: 5px 20px;
+  padding: 5px 10px;
   border-radius: 8px;
-  width: fit-content;
   font-family: Montserrat;
   color: #CED4DA;
   margin: 10px 10px 0px;
+  max-width: 200px;
+  padding-right: 26px;
+}
+
+.texMessage {
+  margin: 0px;
+  width: 100%;
+  word-break: break-all;
+  white-space: normal;
 }
 
 .messageContainer {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   margin: 4px 0px;
   align-items: flex-end;
 }

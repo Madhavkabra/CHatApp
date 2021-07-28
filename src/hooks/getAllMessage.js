@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-import { db } from '../services/firebase/firebase'
+import firestore from 'firebase'
+import { auth, db } from '../services/firebase/firebase'
 
 const useGetMessage = (roomId) => {
   const [data, setData] = useState({
@@ -14,26 +15,39 @@ const useGetMessage = (roomId) => {
     .collection('chatRoom')
     .doc(roomId)
     .collection('messages')
-    .orderBy('sentAt')
+
 
   useEffect(() => {
-    const unSubscribeObserver = query.onSnapshot(
-      (querySnapshot) => {
+    const userId = auth().currentUser.email
+    const unSubscribeObserver = query
+      .where('isDeleted', '==', false)
+      .orderBy('sentAt')
+      .onSnapshot((querySnapshot) => {
+        const messageData = []
+        querySnapshot.docs.forEach((doc) => {
+          const data = doc.data()
+          if (userId !== data.sentBy) {
+            query.doc(doc.id).update({
+              seenBy: firestore.firestore.FieldValue.arrayUnion(userId)
+            })
+          }
+          messageData.push({ ...data, id: doc.id })
+        })
         setData({
           error: null,
           loading: false,
-          messages: querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })),
-        });
+          messages: messageData
+        })
       },
-      (error) => {
-        setData({
-          ...data,
-          error,
-          loading: false,
-          messages: [],
-        });
-      },
-    )
+        (error) => {
+          setData({
+            ...data,
+            error,
+            loading: false,
+            messages: [],
+          });
+        },
+      )
 
     return () => unSubscribeObserver()
   }, [])

@@ -1,0 +1,30 @@
+.ToggleMenuContainer {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+
+.container {
+  color: white;
+  position: absolute;
+  background-color: #0c1a36;
+  border-radius: 8px;
+  padding: 5px;
+  z-index: 1;
+  display: flex;
+  right: 0px !important;
+}
+
+.item {
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  outline: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  background-color: #72697d54;
+  color: white;
+  margin: 4px;
+  font-family: Montserrat;
+}

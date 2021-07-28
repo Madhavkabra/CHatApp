@@ -21,14 +21,14 @@ const useGetRoomData = (roomId) => {
 
     roomRef.get().then(async (doc) => {
       if (doc.exists) {
-        const roomData = doc.data() //get room data
-        const membersId = roomData.members //fetch all room member id 
-        const membersData = [] //array to load data lazyly 
-        const members = await membersId.map(member => userRef.doc(member).get()) //get member data from user collection through memberId it will return array of promises
+        const roomData = doc.data()
+        const membersId = roomData.members
+        const membersData = []
+        const members = await membersId.map(member => userRef.doc(member).get())
         for await (const member of members) {
-          membersData.push(member.data()) //resolve promise and load data inside membersData 
+          membersData.push(member.data())
         }
-        setData({ ...data, members: membersData, roomName: roomData.name }) //seting up the memberData inside state
+        setData({ ...data, members: membersData, roomName: roomData.name })
       } else {
         console.log("No such document!");
       }

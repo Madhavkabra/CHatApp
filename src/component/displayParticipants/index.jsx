@@ -5,9 +5,6 @@ import styles from './displayParticipants.module.css'
 const DisplayParticipants = ({ members, roomName }) => {
   const history = useHistory()
 
-  const roomMemberEmails = members?.map((member) => member.email)
-  const emails = roomMemberEmails && roomMemberEmails.join(', ')
-
   const backToHomePage = () => {
     history.goBack()
   }
@@ -28,16 +25,11 @@ const DisplayParticipants = ({ members, roomName }) => {
       <div className={styles.participantsContainer}>
         <p className={styles.groupName}>{roomName}</p>
         <div className={styles.membersName}>
-          {
-            // !!emails.length && (
-            //   <p className={styles.participantsEmail}>{emails}</p>
-            // )
-            members.map((member, index) => (
-              <div key={index} className={styles.participantsEmail}>
-                {member.email}
-              </div>
-            ))
-          }
+          {members.map((member, index) => (
+            <div key={index} className={styles.participantsEmail}>
+              {member.email}
+            </div>
+          ))}
         </div>
       </div>
     </div>
