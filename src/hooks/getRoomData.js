@@ -6,7 +6,8 @@ const useGetRoomData = (roomId) => {
     error: null,
     loading: true,
     members: [],
-    roomName: null
+    roomName: null,
+    roomType: null
   });
 
   const roomRef = db
@@ -28,7 +29,7 @@ const useGetRoomData = (roomId) => {
         for await (const member of members) {
           membersData.push(member.data())
         }
-        setData({ ...data, members: membersData, roomName: roomData.name })
+        setData({ ...data, members: membersData, roomName: roomData.name, roomType: roomData.type })
       } else {
         console.log("No such document!");
       }

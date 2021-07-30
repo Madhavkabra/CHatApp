@@ -95,6 +95,19 @@
   z-index: 1;
 }
 
+.logo {
+  border-radius: 50%;
+  width: 24px;
+  margin-left: -10px;
+}
+
+.seenBy {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 10px 10px 0px 0px;
+}
+
 /* width */
 .chatContainer::-webkit-scrollbar {
   width: 5px;

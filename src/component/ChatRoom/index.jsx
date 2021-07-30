@@ -27,7 +27,7 @@ const ChatRoom = () => {
   const messageFieldRef = useRef(null)
 
   const { messages: messageData } = useGetMessage(roomId)
-  const { members, roomName } = useGetRoomData(roomId)
+  const { members, roomName, roomType } = useGetRoomData(roomId)
 
   const senderEmail = auth()?.currentUser?.email
 
@@ -91,6 +91,8 @@ const ChatRoom = () => {
         deleteMessageHandler={deleteMessageHandler}
         toggleMenu={toggleMenu}
         isMenuOpen={isMenuOpen}
+        members={members}
+        roomType={roomType}
       />
       <MessageField
         sendMessageToChatRoom={sendMessageToChatRoom}
