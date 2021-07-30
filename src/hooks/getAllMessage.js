@@ -18,7 +18,7 @@ const useGetMessage = (roomId) => {
 
 
   useEffect(() => {
-    const userId = auth().currentUser.email
+    const userId = auth().currentUser.uid
     const unSubscribeObserver = query
       .where('isDeleted', '==', false)
       .orderBy('sentAt')

@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { auth } from '../../../../services/firebase/firebase'
 import cx from 'classnames'
 
 import styles from './../../chatRoom.module.css'
 import Messages from '../Messages'
+import { getSeenByMembersWithChat } from '../../../../utils/getSeenByMembersWithChat/getSeenByMembersWithChat'
 
 const MessageChatContainer = ({
   chatsData,
@@ -17,16 +18,15 @@ const MessageChatContainer = ({
   members,
   roomType,
 }) => {
-  const seenByMembersData = []
-  const myMessages = chatsData?.filter(
-    (chat) => chat.sentBy === auth().currentUser.email,
-  )
+  const [chatMessages, setChatMessages] = useState([])
 
-  const seenByMembers = myMessages[myMessages?.length - 1]?.seenBy
+  const loggedInUser = auth().currentUser.uid
 
-  seenByMembers?.forEach((member) => {
-    seenByMembersData.push(members.find((data) => data.email === member))
-  })
+  //GET MEMBER DATA BY ID
+  useEffect(() => {
+    const chat = getSeenByMembersWithChat(chatsData, loggedInUser, members)
+    setChatMessages(chat)
+  }, [chatsData, loggedInUser, members])
 
   return (
     <div
@@ -35,9 +35,9 @@ const MessageChatContainer = ({
         [styles.chatContainerWithOutEmoji]: !isEmojiOpen,
       })}
     >
-      {!!chatsData?.length ? (
-        chatsData?.map((chat, index) => {
-          const isSentByMe = chat.sentBy === auth().currentUser.email
+      {chatMessages?.length ? (
+        chatMessages?.map((chat, index) => {
+          const isSentByMe = chat.sentBy === auth().currentUser.uid
           const isChatToggleOpen = chatID === chat.id
           return (
             <>
@@ -56,37 +56,28 @@ const MessageChatContainer = ({
                   <Messages
                     isSentByMe={isSentByMe}
                     chat={chat}
-                    editMessageHandler={(message) =>
-                      editMessageHandler(message)
-                    }
-                    deleteMessageHandler={(message) =>
-                      deleteMessageHandler(message)
-                    }
-                    toggleMenu={(id) => toggleMenu(id)}
+                    editMessageHandler={editMessageHandler}
+                    deleteMessageHandler={deleteMessageHandler}
+                    toggleMenu={toggleMenu}
                     isMenuOpen={isMenuOpen}
                     isChatToggleOpen={isChatToggleOpen}
                   />
                 </div>
               </div>
               <div className={styles.seenBy}>
-                {!!(
-                  seenByMembersData?.length &&
-                  myMessages[myMessages.length - 1].id === chat.id
-                ) ? (
-                  <>
-                    {roomType === 'group'
-                      ? seenByMembersData.map(() => (
+                {roomType === 'group'
+                  ? chat.seenBy.map((member) => (
+                      <>
+                        {member?.uid ? (
                           <img
                             src="https://demo.dashboardpack.com/fiori-html-pro/assets/images/avatars/2.jpg"
                             alt=""
                             className={styles.logo}
                           />
-                        ))
-                      : 'seen'}
-                  </>
-                ) : (
-                  ''
-                )}
+                        ) : null}
+                      </>
+                    ))
+                  : 'seen'}
               </div>
             </>
           )

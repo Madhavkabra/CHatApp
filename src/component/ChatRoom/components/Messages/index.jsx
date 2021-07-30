@@ -15,7 +15,11 @@ const Messages = ({
   return (
     <>
       <div>
-        {!isSentByMe && <p className={styles.sender}>{chat.sentBy}</p>}
+        {!isSentByMe && (
+          <p
+            className={styles.sender}
+          >{`${chat?.sentByUser?.firstName} ${chat?.sentByUser?.lastName}`}</p>
+        )}
         <p className={styles.texMessage}>{chat.messageText}</p>
         <div className={styles.messageContainer}>
           <span className={styles.time}>

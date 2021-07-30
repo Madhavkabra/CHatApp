@@ -1,9 +1,10 @@
 .chatAppWraperContainer {
-  background-color: black;
+  background-color: rgb(255, 255, 255);
   height: 100vh
 }
 
 .sender {
+  text-transform: capitalize;
   font-size: 16px;
   font-weight: 700;
   margin: 0px;
@@ -64,13 +65,13 @@
 
 .messages {
   position: relative;
-  background: #334b8e6e;
+  background: #202371;
   padding: 5px 10px;
   border-radius: 8px;
   font-family: Montserrat;
   color: #CED4DA;
   margin: 10px 10px 0px;
-  max-width: 200px;
+  max-width: 60%;
   padding-right: 26px;
 }
 
