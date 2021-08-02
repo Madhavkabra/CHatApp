@@ -65,19 +65,21 @@ const MessageChatContainer = ({
                 </div>
               </div>
               <div className={styles.seenBy}>
-                {roomType === 'group'
-                  ? chat.seenBy.map((member) => (
-                      <>
-                        {member?.uid ? (
-                          <img
-                            src="https://demo.dashboardpack.com/fiori-html-pro/assets/images/avatars/2.jpg"
-                            alt=""
-                            className={styles.logo}
-                          />
-                        ) : null}
-                      </>
-                    ))
-                  : 'seen'}
+                {chat.seenBy.map((member) =>
+                  roomType === 'group' ? (
+                    <>
+                      {member?.uid ? (
+                        <img
+                          src="https://demo.dashboardpack.com/fiori-html-pro/assets/images/avatars/2.jpg"
+                          alt=""
+                          className={styles.logo}
+                        />
+                      ) : null}
+                    </>
+                  ) : (
+                    <>{member?.uid ? 'seen' : null}</>
+                  ),
+                )}
               </div>
             </>
           )
