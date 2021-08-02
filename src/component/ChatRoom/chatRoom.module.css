@@ -57,7 +57,7 @@
   background: #0c2d4e !important;
 }
 
-.wraper {
+.wrapper {
   width: 100%;
   display: flex;
   justify-content: flex-end;
@@ -65,7 +65,7 @@
 
 .messages {
   position: relative;
-  background: #202371;
+  background: #36446b;
   padding: 5px 10px;
   border-radius: 8px;
   font-family: Montserrat;

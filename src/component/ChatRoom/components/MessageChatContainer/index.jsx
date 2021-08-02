@@ -44,7 +44,7 @@ const MessageChatContainer = ({
               <div
                 key={index}
                 className={cx({
-                  [styles.wraper]: isSentByMe,
+                  [styles.wrapper]: isSentByMe,
                 })}
               >
                 <div
