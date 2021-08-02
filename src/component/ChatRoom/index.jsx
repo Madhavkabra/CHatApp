@@ -27,9 +27,9 @@ const ChatRoom = () => {
   const messageFieldRef = useRef(null)
 
   const { messages: messageData } = useGetMessage(roomId)
-  const { members, roomName } = useGetRoomData(roomId)
+  const { members, roomName, roomType } = useGetRoomData(roomId)
 
-  const senderEmail = auth()?.currentUser?.email
+  const senderId = auth()?.currentUser?.uid
 
   useEffect(() => {
     setChatsData(messageData)
@@ -50,7 +50,7 @@ const ChatRoom = () => {
         })
         .catch((error) => console.log(error))
     } else {
-      sendMessage(messageField, roomId, senderEmail)
+      sendMessage(messageField, roomId, senderId)
         .then((success) => {
           console.log(success)
           setMessageField('')
@@ -91,6 +91,8 @@ const ChatRoom = () => {
         deleteMessageHandler={deleteMessageHandler}
         toggleMenu={toggleMenu}
         isMenuOpen={isMenuOpen}
+        members={members}
+        roomType={roomType}
       />
       <MessageField
         sendMessageToChatRoom={sendMessageToChatRoom}
