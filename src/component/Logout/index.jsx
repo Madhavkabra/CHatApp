@@ -16,7 +16,7 @@ const Logout = () => {
   }, [window.location])
 
   const logoutUser = () => {
-    auth().signOut()
+    auth().signOut().then(()=>localStorage.clear())
   }
 
   return (

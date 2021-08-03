@@ -1,39 +1,42 @@
-import React, { lazy, Suspense, useEffect, useState } from 'react'
-import { Route, Switch, Redirect, Router } from 'react-router-dom'
-import { auth } from '../services/firebase/firebase'
-import { history } from './history'
-import PrivateRoute from './privateRoute'
-import PublicRoute from './publicRoute'
+import React, { lazy, Suspense, useEffect, useState } from "react";
+import { Route, Switch, Redirect, Router } from "react-router-dom";
+import { auth } from "../services/firebase/firebase";
+import { history } from "./history";
+import PrivateRoute from "./privateRoute";
+import PublicRoute from "./publicRoute";
 
-const Chat = lazy(() => import('../component/Chat'))
-const Login = lazy(() => import('../component/Login'))
-const Signup = lazy(() => import('../component/Signup'))
-const Home = lazy(() => import('../component/Home'))
-const ChatRoom = lazy(() => import('../component/ChatRoom'))
+const Chat = lazy(() => import("../component/Chat"));
+const Login = lazy(() => import("../component/Login"));
+const Signup = lazy(() => import("../component/Signup"));
+const Home = lazy(() => import("../component/Home"));
+const ChatRoom = lazy(() => import("../component/ChatRoom"));
+const EditProfile = lazy(() =>
+  import("./../component/UserProfile/components/EditProfile")
+);
 
 const Routes = () => {
-  const [authenticated, setAuthenticated] = useState(false)
-  const [loading, setLoading] = useState(true)
+  const [authenticated, setAuthenticated] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (authenticated) {
-      history.push('/chat')
+      history.push("/chat");
     } else {
-      history.push('/')
+      history.push("/");
     }
-  }, [authenticated])
+  }, [authenticated]);
 
   useEffect(() => {
     auth().onAuthStateChanged((user) => {
       if (user) {
-        setAuthenticated(true)
-        setLoading(false)
+        setAuthenticated(true);
+        setLoading(false);
       } else {
-        setAuthenticated(false)
-        setLoading(false)
+        setAuthenticated(false);
+        setLoading(false);
       }
-    })
-  }, [window.location])
+    });
+  }, [window.location]);
 
   return (
     <Suspense fallback={<>Loading ... </>}>
@@ -63,12 +66,17 @@ const Routes = () => {
             authenticated={authenticated}
             component={ChatRoom}
           ></Route>
+          <Route
+            path="/editProfile"
+            authenticated={authenticated}
+            component={EditProfile}
+          ></Route>
           <Route exact path="/" component={Home}></Route>
           <Redirect to="/" component={Home} />
         </Switch>
       </Router>
     </Suspense>
-  )
-}
+  );
+};
 
-export default Routes
+export default Routes;

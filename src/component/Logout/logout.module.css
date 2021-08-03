@@ -1,9 +1,3 @@
-.root {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-}
-
 .logoutBtn {
   background: rgb(89, 8, 165);
   color: white;

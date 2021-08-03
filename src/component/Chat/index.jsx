@@ -7,9 +7,11 @@ import AddNewRoom from "../AddRoomForm";
 import Logout from "../Logout";
 import MyRooms from "../MyRooms";
 import UserProfileView from "../UserProfile/components/UserProfileView";
+import styles from "./chat.module.css";
 
 const Chat = () => {
   const { users } = useUsers();
+
   const currentUsersId =
     users && users.filter((user) => user.email === auth()?.currentUser?.email);
 
@@ -23,15 +25,14 @@ const Chat = () => {
   const history = useHistory();
 
   return (
-    <div>
+    <>
       <AddNewRoom users={users} currentUsersId={currentUsersId} />
       <MyRooms currentUsersId={currentUsersId} />
-      <div>
+      <div className={styles.root}>
         <UserProfileView />
         <Logout />
       </div>
-    </div>
+    </>
   );
 };
-
 export default Chat;
