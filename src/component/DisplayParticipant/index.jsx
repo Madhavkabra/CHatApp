@@ -3,7 +3,7 @@ import Avatar from 'react-avatar'
 import { useHistory } from 'react-router-dom'
 import styles from './displayParticipants.module.css'
 
-const DisplayParticipants = ({ members, roomName }) => {
+const DisplayParticipants = ({ members, roomName, roomType }) => {
   const history = useHistory()
 
   const backToHomePage = () => {
@@ -21,13 +21,18 @@ const DisplayParticipants = ({ members, roomName }) => {
       <Avatar name={roomName} size="42" round textSizeRatio={3} />
       <div className={styles.participantsContainer}>
         <p className={styles.groupName}>{roomName}</p>
-        <div className={styles.membersName}>
-          {members.map((member, index) => (
-            <div key={index} className={styles.participantsEmail}>
-              {member.email}
-            </div>
-          ))}
-        </div>
+        {roomType === 'group' && (
+          <>
+            <p
+              className={styles.memberName}
+            >{`${members.length} participants`}</p>
+            <ul className={styles.participantList}>
+              {members.map((member, index) => (
+                <li key={index}>{member.email}</li>
+              ))}
+            </ul>
+          </>
+        )}
       </div>
     </div>
   )

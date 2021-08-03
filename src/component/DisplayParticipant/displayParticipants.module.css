@@ -1,42 +1,58 @@
 .displayPatientHeader {
+  position: relative;
   background-image: linear-gradient(142deg, #060607, #061e63bf) !important;
   display: flex;
   align-items: center;
   top: 0px;
   width: 100%;
+  min-height: 60px;
 }
 
 .participantsContainer {
   display: flex;
   overflow: hidden;
   padding: 10px;
-  font-family: Montserrat;
+  font-family: 'Montserrat';
   color: #CED4DA;
   flex-direction: column;
 }
 
 .groupName {
   margin: 0px;
-  font-family: Montserrat;
+  font-family: 'Montserrat';
   font-size: 16px;
   font-weight: 500;
 }
 
-.membersName {
-  display: flex;
-  width: 100%;
-  align-items: center;
+.memberName {
+  margin: 0px;
+  font-family: 'Montserrat';
+  font-size: 16px;
+  font-weight: 500;
 }
 
-.logo {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
+.participantList {
+  display: none;
+  position: absolute;
+  left: 67px;
+  bottom: -131px;
+  z-index: 1;
+  color: #ffffffb0;
+  background-color: #192a5f;
+  padding: 14px;
+  list-style: none;
+  width: 300px;
+  border-radius: 12px;
 }
 
-.participantsEmail {
-  max-width: 100px;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  font-size: 12px;
+.participantList>li {
+  margin-bottom: 10px;
+}
+
+.participants {
+  margin: 0%;
+}
+
+.memberName:hover+.participantList {
+  display: block;
 }
