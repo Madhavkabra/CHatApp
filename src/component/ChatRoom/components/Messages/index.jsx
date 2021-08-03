@@ -1,7 +1,6 @@
-import React from 'react'
-import ToggleMenu from '../../../ToggleMenu'
-
-import styles from './../../chatRoom.module.css'
+import React from "react";
+import ToggleMenu from "../../../ToggleMenu";
+import styles from "./../../chatRoom.module.css";
 
 const Messages = ({
   isSentByMe,
@@ -23,7 +22,7 @@ const Messages = ({
         <p className={styles.texMessage}>{chat.messageText}</p>
         <div className={styles.messageContainer}>
           <span className={styles.time}>
-            {new Date(chat.sentAt.seconds * 1000).toLocaleTimeString('en-US', {
+            {new Date(chat.sentAt.seconds * 1000).toLocaleTimeString("en-US", {
               hour12: true,
             })}
           </span>
@@ -40,7 +39,7 @@ const Messages = ({
         />
       )}
     </>
-  )
-}
+  );
+};
 
-export default Messages
+export default Messages;

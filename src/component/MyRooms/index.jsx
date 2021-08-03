@@ -1,28 +1,36 @@
-import React from 'react'
-import { useHistory } from 'react-router-dom'
-import useMyRooms from '../../hooks/getMyRooms'
+import React from "react";
+
+import useMyRooms from "../../hooks/getMyRooms";
+import GroupChat from "./components/GroupChat";
+import PersonalChat from "./components/PersonalChat";
+
+import styles from "./myRoom.module.css";
 
 const MyRooms = ({ currentUsersId }) => {
-  const { rooms } = useMyRooms(currentUsersId && currentUsersId[0]?.id)
-  const history = useHistory()
+
+  const { rooms } = useMyRooms(currentUsersId && currentUsersId[0]?.id);
+  const personalChats = [];
+  const groupChat = [];
+
+  rooms.forEach((room) => {
+    room.type === "oneOnOne" ? personalChats.push(room) : groupChat.push(room);
+  });
 
   return (
-    <div>
-      My Rooms
-      <div>
-        {!!(rooms &&
-          rooms.length) &&
-          rooms.map((room, index) => (
-            <div
-              key={index}
-              onClick={() => history.push(`/rooms/${room.id}`)}
-            >
-              {room.name}
-            </div>
-          ))}
-      </div>
+    <div className={styles.myRoomContainer}>
+      {!!(rooms && rooms.length) && (
+        <>
+          <div className={styles.content}>
+            <PersonalChat
+              room={personalChats}
+              currentUsersId={currentUsersId}
+            />
+          </div>
+          <GroupChat room={groupChat} />
+        </>
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default MyRooms
+export default MyRooms;
