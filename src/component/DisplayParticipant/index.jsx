@@ -1,4 +1,5 @@
 import React from 'react'
+import Avatar from 'react-avatar'
 import { useHistory } from 'react-router-dom'
 import styles from './displayParticipants.module.css'
 
@@ -17,11 +18,7 @@ const DisplayParticipants = ({ members, roomName }) => {
         alt="back button"
         onClick={backToHomePage}
       />
-      <img
-        src="https://demo.dashboardpack.com/fiori-html-pro/assets/images/avatars/2.jpg"
-        alt=""
-        className={styles.logo}
-      />
+      <Avatar name={roomName} size="42" round textSizeRatio={3} />
       <div className={styles.participantsContainer}>
         <p className={styles.groupName}>{roomName}</p>
         <div className={styles.membersName}>
