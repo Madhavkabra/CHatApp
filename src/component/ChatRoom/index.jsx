@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
 import { auth } from "../../services/firebase/firebase";
 
 import DisplayParticipants from "../DisplayParticipant";
@@ -16,13 +15,12 @@ import {
 
 import styles from "./chatRoom.module.css";
 
-const ChatRoom = () => {
+const ChatRoom = ({ roomId }) => {
   const [messageField, setMessageField] = useState("");
   const [chatID, setchatID] = useState(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [chatsData, setChatsData] = useState([]);
   const [isEmojiOpen, setisEmojiOpen] = useState(false);
-  const { roomId } = useParams();
   const latestMessageRef = useRef(null);
   const messageFieldRef = useRef(null);
 

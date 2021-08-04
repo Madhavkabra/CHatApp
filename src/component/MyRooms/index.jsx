@@ -1,14 +1,10 @@
 import React from "react";
-
-import useMyRooms from "../../hooks/getMyRooms";
 import GroupChat from "./components/GroupChat";
 import PersonalChat from "./components/PersonalChat";
 
 import styles from "./myRoom.module.css";
 
-const MyRooms = ({ currentUsersId, users }) => {
-
-  const { rooms } = useMyRooms(currentUsersId && currentUsersId[0]?.id);
+const MyRooms = ({ currentUsersId, users, rooms, setCurrentChatRoomId }) => {
   const personalChats = [];
   const groupChat = [];
 
@@ -25,12 +21,14 @@ const MyRooms = ({ currentUsersId, users }) => {
               room={personalChats}
               currentUsersId={currentUsersId}
               users={users}
+              setCurrentChatRoomId={setCurrentChatRoomId}
             />
           </div>
           <GroupChat
             room={groupChat}
             currentUsersId={currentUsersId}
             users={users}
+            setCurrentChatRoomId={setCurrentChatRoomId}
           />
         </>
       )}

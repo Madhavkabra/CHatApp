@@ -77,7 +77,9 @@ const MessageChatContainer = ({
                       ) : null}
                     </>
                   ) : (
-                    <>{member?.uid ? 'seen' : null}</>
+                    <>
+                      {member?.uid ? <p className={styles.seen}>seen</p> : null}
+                    </>
                   ),
                 )}
               </div>

@@ -1,8 +1,9 @@
 .myRoomContainer {
-    width: 272px;
-    border-right: 1px solid #F3F8FE;
-    margin-top: 26px;
-  }
-  .content {
-    margin-bottom: 36px;
-  }
+  width: 272px;
+  border-right: 1px solid #F3F8FE;
+  margin-top: 26px;
+}
+
+.content {
+  margin-bottom: 36px;
+}

@@ -1,13 +1,12 @@
-import React, { useState } from "react";
-import { withRouter } from "react-router-dom";
-import cx from "classnames";
+import React, { useState } from 'react'
+import cx from 'classnames'
 
-import Modal from "../../../Modal";
+import Modal from '../../../Modal'
 
-import styles from "./../PersonalChat/personalChat.module.css";
+import styles from './../PersonalChat/personalChat.module.css'
 
-const GroupChat = ({ room, history, currentUsersId, users }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+const GroupChat = ({ room, currentUsersId, users, setCurrentChatRoomId }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   return (
     <>
@@ -24,7 +23,7 @@ const GroupChat = ({ room, history, currentUsersId, users }) => {
         <div
           key={index}
           className={styles.container}
-          onClick={() => history.push(`/rooms/${room.id}`)}
+          onClick={() => setCurrentChatRoomId(room.id)}
         >
           <img
             src="https://demo.dashboardpack.com/fiori-html-pro/assets/images/avatars/2.jpg"
@@ -45,7 +44,7 @@ const GroupChat = ({ room, history, currentUsersId, users }) => {
         />
       )}
     </>
-  );
-};
+  )
+}
 
-export default withRouter(GroupChat);
+export default GroupChat
