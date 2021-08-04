@@ -7,6 +7,7 @@ import AddNewRoom from "../AddRoomForm";
 import Logout from "../Logout";
 import MyRooms from "../MyRooms";
 import UserProfileView from "../UserProfile/components/UserProfileView";
+
 import styles from "./chat.module.css";
 
 const Chat = () => {
@@ -27,7 +28,7 @@ const Chat = () => {
   return (
     <>
       <AddNewRoom users={users} currentUsersId={currentUsersId} />
-      <MyRooms currentUsersId={currentUsersId} />
+      <MyRooms currentUsersId={currentUsersId} users={users} />
       <div className={styles.root}>
         <UserProfileView />
         <Logout />

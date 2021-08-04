@@ -1,16 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import cx from "classnames";
 
+import Modal from "../../../Modal";
+
 import styles from "./../PersonalChat/personalChat.module.css";
 
-const GroupChat = ({ room, history }) => {
+const GroupChat = ({ room, history, currentUsersId, users }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <>
       <div className={styles.header}>
         <p className={styles.heading}>Rooms</p>
-        <p className={cx(styles.heading, styles.plus)}>+</p>
+        <p
+          className={cx(styles.heading, styles.plus)}
+          onClick={() => setIsModalOpen(true)}
+        >
+          +
+        </p>
       </div>
       {room.map((room, index) => (
         <div
@@ -29,7 +37,15 @@ const GroupChat = ({ room, history }) => {
           </div>
         </div>
       ))}
+      {isModalOpen && (
+        <Modal
+          currentUsersId={currentUsersId}
+          users={users}
+          setIsModalOpen={setIsModalOpen}
+        />
+      )}
     </>
   );
 };
+
 export default withRouter(GroupChat);

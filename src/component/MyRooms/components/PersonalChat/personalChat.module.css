@@ -1,48 +1,49 @@
 .container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 228px;
-    padding-top: 13px;
-    margin: auto;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 228px;
+  padding-top: 13px;
+  margin: auto;
+}
 
-  .content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-  }
+.content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
 
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: auto;
-    width: 228px;
-  }
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
+  width: 228px;
+}
 
-  .heading {
-    color: #556E9A;
-    font-size: 11px;
-    font-weight: 400;
-    margin: 0px;
-  }
+.heading {
+  color: #556E9A;
+  font-size: 11px;
+  font-weight: 400;
+  margin: 0px;
+}
 
-  .plus {
-    font-size: 20px;
-  }
+.plus {
+  font-size: 20px;
+  cursor: pointer;
+}
 
-  .logo {
-    border-radius: 50%;
-    margin-right: 12px;
-    max-width: 24px;
-    max-height: 24px;
-    object-fit: cover;
-  }
+.logo {
+  border-radius: 50%;
+  margin-right: 12px;
+  max-width: 24px;
+  max-height: 24px;
+  object-fit: cover;
+}
 
-  .memberName {
-    margin: 0px;
-    font-size: 14px;
-    color: #314363;
-  }
+.memberName {
+  margin: 0px;
+  font-size: 14px;
+  color: #314363;
+}

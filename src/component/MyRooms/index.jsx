@@ -6,7 +6,7 @@ import PersonalChat from "./components/PersonalChat";
 
 import styles from "./myRoom.module.css";
 
-const MyRooms = ({ currentUsersId }) => {
+const MyRooms = ({ currentUsersId, users }) => {
 
   const { rooms } = useMyRooms(currentUsersId && currentUsersId[0]?.id);
   const personalChats = [];
@@ -24,9 +24,14 @@ const MyRooms = ({ currentUsersId }) => {
             <PersonalChat
               room={personalChats}
               currentUsersId={currentUsersId}
+              users={users}
             />
           </div>
-          <GroupChat room={groupChat} />
+          <GroupChat
+            room={groupChat}
+            currentUsersId={currentUsersId}
+            users={users}
+          />
         </>
       )}
     </div>
