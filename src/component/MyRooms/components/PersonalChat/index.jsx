@@ -1,11 +1,14 @@
 import Avatar from 'react-avatar'
 
-import useUsers from '../../../../hooks/getAllUsers'
 import { createRoom } from '../../../../services/firebase/chat/chatRoom'
 import styles from './personalChat.module.css'
 
-const PersonalChat = ({ room, currentUsersId, setCurrentChatRoomId }) => {
-  const { users } = useUsers()
+const PersonalChat = ({
+  room,
+  currentUsersId,
+  setCurrentChatRoomId,
+  users,
+}) => {
   const createNewRoom = (members) => {
     createRoom(members, currentUsersId[0].id, '', 'oneOnOne')
       .then((success) => {

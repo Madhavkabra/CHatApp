@@ -32,7 +32,7 @@ const Chat = () => {
     <>
       {/* <AddNewRoom users={users} currentUsersId={currentUsersId} /> */}
 
-      {!!currentChatRoomId.length && (
+      {!!(currentChatRoomId.length || users.length > 0) && (
         <div className={styles.chatRoomContainer}>
           <MyRooms
             currentUsersId={currentUsersId}
@@ -40,7 +40,9 @@ const Chat = () => {
             rooms={rooms}
             setCurrentChatRoomId={setCurrentChatRoomId}
           />
-          <ChatRoom roomId={currentChatRoomId} />
+          {currentChatRoomId.length > 0 && (
+            <ChatRoom roomId={currentChatRoomId} />
+          )}
         </div>
       )}
       <div className={styles.root}>

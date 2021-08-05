@@ -14,7 +14,7 @@ const MyRooms = ({ currentUsersId, users, rooms, setCurrentChatRoomId }) => {
 
   return (
     <div className={styles.myRoomContainer}>
-      {!!(rooms && rooms.length) && (
+      {!!users.length > 0 && (
         <>
           <div className={styles.content}>
             <PersonalChat
