@@ -6,6 +6,7 @@ import { auth } from '../../services/firebase/firebase'
 import ChatRoom from '../ChatRoom'
 import Logout from '../Logout'
 import MyRooms from '../MyRooms'
+import SideBar from '../SideBar'
 import UserProfileView from '../UserProfile/components/UserProfileView'
 
 import styles from './chat.module.css'
@@ -34,6 +35,7 @@ const Chat = () => {
 
       {!!(currentChatRoomId.length || users.length > 0) && (
         <div className={styles.chatRoomContainer}>
+          <SideBar currentUsersId={currentUsersId[0]} />
           <MyRooms
             currentUsersId={currentUsersId}
             users={users}

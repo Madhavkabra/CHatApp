@@ -6,9 +6,11 @@
 
 .sender {
   text-transform: capitalize;
-  font-size: 16px;
   font-weight: 700;
-  margin: 0px;
+  margin: 0px 0px 4px;
+  font-family: Open Sans;
+  font-size: 10px;
+  color: #A2A2A2;
 }
 
 .time {
@@ -45,14 +47,15 @@
 
 .chatContainer {
   overflow: auto;
+  padding: 4px 32px;
 }
 
 .chatContainerWithOutEmoji {
-  height: calc(100% - 104px);
+  height: calc(100% - 136px);
 }
 
 .chatContainerWithEmoji {
-  height: calc(100% - 524.5px);
+  height: calc(100% - 556.5px);
 }
 
 .myMessages {
@@ -60,8 +63,11 @@
 }
 
 .wrapper {
-  width: 100%;
+  padding: 16px 0px 0px;
   display: flex;
+}
+
+.sentByMe {
   justify-content: flex-end;
 }
 
@@ -72,9 +78,8 @@
   border-radius: 8px;
   font-family: Montserrat;
   color: #CED4DA;
-  margin: 10px 10px 0px;
-  max-width: 60%;
-  padding-right: 26px;
+  padding: 16px;
+  font-size: 18px;
 }
 
 .texMessage {
@@ -113,6 +118,17 @@
 
 .seen {
   margin: 0px;
+}
+
+.sendBy {
+  display: flex;
+  flex-direction: column;
+  margin: 0px 16px;
+  max-width: 60%;
+}
+
+.sendByMe {
+  align-items: flex-end;
 }
 
 /* width */

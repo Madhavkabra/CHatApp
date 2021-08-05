@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { auth } from '../../../../services/firebase/firebase'
 import cx from 'classnames'
+import Avatar from 'react-avatar'
 
 import styles from './../../chatRoom.module.css'
 import Messages from '../Messages'
@@ -21,6 +22,28 @@ const MessageChatContainer = ({
   const [chatMessages, setChatMessages] = useState([])
 
   const loggedInUser = auth().currentUser.uid
+
+  const displaySenderIcon = (chat) => (
+    <>
+      {chat.sentByUser?.profile ? (
+        <img src={chat.sentByUser.profile} alt="" />
+      ) : (
+        <Avatar
+          name={`${chat.sentByUser?.firstName} ${chat.sentByUser?.lastName}`}
+          size="42"
+          round
+          textSizeRatio={3}
+        />
+      )}
+    </>
+  )
+
+  const sentAt = (sentAt) => {
+    const date = new Date(sentAt.seconds * 1000).toLocaleTimeString('en-US', {
+      hour12: true,
+    })
+    return `${date.split(':', 2).join(':')} ${date.split(' ', 2)[1]}`
+  }
 
   //GET MEMBER DATA BY ID
   useEffect(() => {
@@ -43,26 +66,38 @@ const MessageChatContainer = ({
             <>
               <div
                 key={index}
-                className={cx({
-                  [styles.wrapper]: isSentByMe,
+                className={cx(styles.wrapper, {
+                  [styles.sentByMe]: isSentByMe,
                 })}
               >
+                {!isSentByMe && displaySenderIcon(chat)}
                 <div
-                  className={cx(styles.messages, {
-                    [styles.myMessages]: isSentByMe,
+                  className={cx(styles.sendBy, {
+                    [styles.sendByMe]: isSentByMe,
                   })}
-                  ref={latestMessageRef}
                 >
-                  <Messages
-                    isSentByMe={isSentByMe}
-                    chat={chat}
-                    editMessageHandler={editMessageHandler}
-                    deleteMessageHandler={deleteMessageHandler}
-                    toggleMenu={toggleMenu}
-                    isMenuOpen={isMenuOpen}
-                    isChatToggleOpen={isChatToggleOpen}
-                  />
+                  <p className={styles.sender}>
+                    {`${chat?.sentByUser?.firstName} ${chat?.sentByUser?.lastName}, `}
+                    {sentAt(chat.sentAt)}
+                  </p>
+                  <div
+                    className={cx(styles.messages, {
+                      [styles.myMessages]: isSentByMe,
+                    })}
+                    ref={latestMessageRef}
+                  >
+                    <Messages
+                      isSentByMe={isSentByMe}
+                      chat={chat}
+                      editMessageHandler={editMessageHandler}
+                      deleteMessageHandler={deleteMessageHandler}
+                      toggleMenu={toggleMenu}
+                      isMenuOpen={isMenuOpen}
+                      isChatToggleOpen={isChatToggleOpen}
+                    />
+                  </div>
                 </div>
+                {isSentByMe && displaySenderIcon(chat)}
               </div>
               <div className={styles.seenBy}>
                 {chat.seenBy.map((member) =>
