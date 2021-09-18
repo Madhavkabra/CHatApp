@@ -1,6 +1,14 @@
-# Getting Started with Create React App
+# Serverless Chat app created using React.js and firebase
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is under development and can be accessed [here](https://chat-5a2f6.web.app/).
+
+## Features available
+
+- Authorisation and authentication using firebase auth.
+- Create a 1-1 chat or room/channel with multiple people.
+- Real time chat in above rooms.
+- Seen message functionality.
+- Add/update user profile.
 
 ## Available Scripts
 
