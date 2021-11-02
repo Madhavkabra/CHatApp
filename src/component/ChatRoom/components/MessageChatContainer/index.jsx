@@ -26,7 +26,7 @@ const MessageChatContainer = ({
   const displaySenderIcon = (chat) => (
     <>
       {chat.sentByUser?.profile ? (
-        <img src={chat.sentByUser.profile} alt="" />
+        <img src={chat.sentByUser.profile} alt="" className={styles.profile} />
       ) : (
         <Avatar
           name={`${chat.sentByUser?.firstName} ${chat.sentByUser?.lastName}`}

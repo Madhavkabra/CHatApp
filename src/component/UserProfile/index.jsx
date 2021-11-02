@@ -1,11 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
+import EditProfile from './components/EditProfile'
 import UserProfileView from './components/UserProfileView'
 
-const UserProfile = () => {
+const UserProfile = ({ currentUsersId }) => {
+  const [isEditPageOpen, setIsEditPageOpen] = useState(false)
+
   return (
-    <div>
-      <UserProfileView />
-    </div>
+    <>
+      <UserProfileView setIsEditPageOpen={setIsEditPageOpen} />
+      {isEditPageOpen && (
+        <EditProfile
+          userData={currentUsersId}
+          setIsEditPageOpen={setIsEditPageOpen}
+        />
+      )}
+    </>
   )
 }
 

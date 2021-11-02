@@ -1,0 +1,30 @@
+.editProfileContainer {
+  position: fixed;
+  right: 0px;
+  background: #0000008a;
+  height: 100vh;
+  width: 100%;
+  top: 0px;
+  display: flex;
+  z-index: 2;
+  justify-content: flex-end;
+}
+
+.editProfileWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 272px;
+  background-color: white;
+}
+
+.profilePreview {
+  margin-top: 100px;
+  border-radius: 50%;
+  height: 100px;
+  width: 100px;
+}
+
+.profilePicker {
+  width: 80%;
+}

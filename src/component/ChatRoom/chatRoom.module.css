@@ -51,11 +51,11 @@
 }
 
 .chatContainerWithOutEmoji {
-  height: calc(100% - 136px);
+  height: calc(100% - 150px);
 }
 
 .chatContainerWithEmoji {
-  height: calc(100% - 556.5px);
+  height: calc(100% - 570.5px);
 }
 
 .myMessages {
@@ -71,7 +71,7 @@
   justify-content: flex-end;
 }
 
-.messages {
+/* .messages {
   position: relative;
   background: #36446b;
   padding: 5px 10px;
@@ -80,6 +80,19 @@
   color: #CED4DA;
   padding: 16px;
   font-size: 18px;
+} */
+.messages {
+  position: relative;
+  background: #36446b;
+  padding: 5px 19px 5px 10px;
+  border-radius: 8px;
+  font-family: Montserrat;
+  color: #CED4DA;
+  /* padding: 16px; */
+  font-size: 18px;
+  min-height: 49px;
+  display: flex;
+  align-items: center;
 }
 
 .texMessage {
@@ -129,6 +142,12 @@
 
 .sendByMe {
   align-items: flex-end;
+}
+
+.profile {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
 }
 
 /* width */

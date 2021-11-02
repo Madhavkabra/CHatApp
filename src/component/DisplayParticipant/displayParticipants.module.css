@@ -10,7 +10,7 @@
 .participantsContainer {
   display: flex;
   overflow: hidden;
-  padding: 10px;
+  padding: 0px 10px;
   font-family: 'Montserrat';
   color: #CED4DA;
   flex-direction: column;
